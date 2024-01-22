@@ -1,0 +1,21 @@
+
+#Easy settings:
+project_name = "$undefined"
+binary_name = "$undefined"
+
+#Advanced settings:
+#######################################################
+
+project:
+    name = "$undefined;"
+    type = "program"
+    clear:
+        command = " #If you want, add some"
+    build.driver = "runcommand"
+    build.command = "  #If you want, add some"
+    debugging:
+        debugger:
+            driver = "CDP"
+            runtimetp = "node"
+            file = "index.js"
+            args = "uloha2/ENG/0001_in.txt"
