@@ -1,0 +1,33 @@
+use core
+use platforms
+use cpp
+use LT
+
+# Initialize some common variables, such as output directories
+configureBuild("Debug", true) 
+
+# Enable use of tmpfs for autogen outputs
+enableOutputTmpfs("autogen", -1)
+enableOutputTmpfs("temp", -1)
+
+# Make build subdirectories (bin, lib, autogen, ...)  
+makeOutputDirectories()
+symlinkHostBuild() #Symlink current platform output to `build/current` to make it usable with LTStudio
+
+#Now specify the project(s), we want to build
+project {
+    name "Kostka"
+    #And add tasks cascade under our project (Can also add sub-project)
+    cc {
+        name "Kostka"
+        file "src/main.cpp"
+        
+        #Link LTBase for the LString, LArray, FileExists, ... symbols
+        link LT_BASELIBS
+        incpath LT_INCLUDEPATHS
+        
+        lp = lt_getLinkPaths()
+        linkpath lp
+        rpath lp
+    }
+} 
